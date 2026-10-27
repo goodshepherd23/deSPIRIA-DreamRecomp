@@ -1,0 +1,88 @@
+# deSPIRIA (English, Chapter 1 preview), T14402M
+# Template for the deSPIRIA kit: setup.ps1 replaces @DISC@ with your disc image. Everything here
+# is read off the disc or is the standard Katana layout; nothing from the disc itself is included.
+
+[game]
+id = "despiria_en"
+title = "deSPIRIA (English, Chapter 1 preview)"
+region = "Japan"
+product = "T14402M"
+
+[disc]
+image = "@DISC@"
+
+[binary]
+path = "extracted/fs/1ST_READ.BIN"
+load_address = 0x8C010000    # where the console's BIOS loads the file
+link_address = 0x0C010000    # the same RAM through a different address; what the code assumes
+entry = 0x8C010000           # the first instruction
+
+# Addresses discovery does not reach, and regions the program copies and runs elsewhere, both go
+# here. Run the launcher with --suggest-config FILE and it writes them for you.
+
+# --- merged from --suggest-config runs ---
+[functions]
+extra = [
+  0x0C065520,
+  0x0C0E0468,
+  0x0C0E0476,
+  0x0C0E047E,
+  0x0C0E0490,
+  0x0C0E0496,
+  0x0C0E049A,
+  0x0C0E049E,
+  0x0C0E04A2,
+  0x0C0E04AC,
+  0x0C0E04CE,
+  0x0C0E04E2,
+  0x0C0E04E8,
+  0x0C0F44E8,
+  0x0C172F58,
+  0x0C17307A,
+  0x0C1730F2,
+  0x0C173196,
+]
+# Quarantined: translated code that misbehaves, left to the dev interpreter.
+# 0x0C0E0468 (fn_0c0e0468, 68 bytes): the translated build faults at frame 1660 with
+# 'unimplemented instruction 0x0000 at 0xf3f1fb32'; --interpret runs 3600 frames cleanly, and
+# DREAM_INTERP_RANGE bisection (2000 frames, --rtc-seed 1) narrows it to this one function.
+# 0x0C0E04AC (fn_0c0e04ac, 74 bytes, called from the one above; calls through a function
+# pointer at @(60,r2)): with the first quarantined, the run faults the same way at frame
+# 3391; bisection over a 3600-frame run narrows that fault to this function.
+# 0x0C0F44E8 (fn_0c0f44e8, 350 bytes): the thread library's preemptive context switch -- saves
+# every register and both FPU banks, asks the scheduler at 0x0C0F4664 for the next stack, restores
+# and ends in rte. Translated, movies crawl (311,040 YUV words by frame 3000 with audio fixed);
+# interpreted alone it gives exactly the pure interpreter's 5,667,840. Likely cause: the emitted
+# rte unwinds to the delivering C++ frame, resuming the preempted thread instead of the new SPC.
+# Not a repair: report it against the emitter and remove once fixed.
+exclude = [0x0C0E0468, 0x0C0E04AC, 0x0C0F44E8]
+
+[[relocations]]
+source = 0x0C115FD8
+size = 0x34
+dest = 0x8C000000
+
+[[relocations]]
+source = 0x0C115F44
+size = 0x34
+dest = 0x8C000100
+
+[[relocations]]
+source = 0x0C115F44
+size = 0x34
+dest = 0x8C000400
+
+[[relocations]]
+source = 0x0C115F7C
+size = 0x58
+dest = 0x8C000600
+
+[[relocations]]
+source = 0x0C17258C
+size = 0x38
+dest = 0x8C00EB78
+
+[[relocations]]
+source = 0x0C16E214
+size = 0x34
+dest = 0x8C00F330
