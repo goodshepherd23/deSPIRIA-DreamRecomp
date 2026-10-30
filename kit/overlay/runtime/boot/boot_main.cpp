@@ -1624,9 +1624,15 @@ int main(int argc, char** argv) {
         const auto started = std::chrono::steady_clock::now();
         // Wall-clock time the guest was stopped for, which the pacing below owes back. Without it
         // the run would sprint to catch up the moment the binding screen closed.
+        // Both live in the lambda, not in this block: the lambda runs for the rest of the run, long
+        // after the block has ended, and capturing them by reference read and wrote a dead stack
+        // slot -- the pacing target wandered with whatever was left there, which is a stutter.
         auto paused_for = std::chrono::steady_clock::duration::zero();
+        // How far behind the guest may fall before the pacing stops trying to make it up. A frame
+        // or two absorbs ordinary jitter; anything longer is a hitch that has already been seen.
+        const auto kPaceSlack = std::chrono::milliseconds(50);
         auto previous_vblank = std::move(sys.spg.on_vblank_out);
-        sys.spg.on_vblank_out = [&, previous_vblank, started] {
+        sys.spg.on_vblank_out = [&, previous_vblank, started, paused_for, kPaceSlack]() mutable {
             if (previous_vblank)
                 previous_vblank();
             if (!live->present(sys.spg.frames(), sys.ctx.cycles))
@@ -1657,8 +1663,15 @@ int main(int argc, char** argv) {
                 started + paused_for +
                 std::chrono::duration_cast<std::chrono::steady_clock::duration>(guest);
             const auto now = std::chrono::steady_clock::now();
-            if (target > now && target - now < std::chrono::seconds(1))
+            if (target > now && target - now < std::chrono::seconds(1)) {
                 std::this_thread::sleep_for(target - now);
+            } else if (now - target > kPaceSlack) {
+                // Behind. Forgive the debt instead of running flat out until the guest has caught
+                // up: a sprint plays the next stretch fast-forward and produces sound faster than
+                // the device consumes it, so the sink throws blocks away and the player hears
+                // crackles on top of the hitch. Owing nothing, a slow host just runs a little slow.
+                paused_for += now - target;
+            }
         };
     }
 #endif

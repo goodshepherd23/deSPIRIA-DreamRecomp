@@ -94,6 +94,13 @@ All fixes are in `kit\overlay`, applied over dream-recomp `51a148c`:
 - **Movies**: stride textures keep their size for texture coordinates and take only their row
   spacing from `TEXT_CONTROL`, and textures the game rewrites in place are re-read each frame.
   Movies were smeared and froze.
+- **Smooth pacing** (v0.1.1): the frame pacing kept its state in a variable that had gone out
+  of scope, so its target wandered, and when it fell behind it sprinted to catch up, playing
+  ahead and throwing sound away. It now owns its state and forgives a hitch instead of sprinting.
+- **No crackles** (v0.1.1): instead of dropping sound when the sound card's clock and the PC's
+  drift apart, playback speed is nudged by at most half a percent to keep the queue steady.
+- **Letterbox bars** (v0.1.1): in a wide window the right-hand bar showed the picture's last
+  column smeared across it; the bars are now black.
 - **Windows builds** copy the DLLs a program needs next to it.
 - **Shaders**: precompiled shader headers are used when `glslc` is not installed, so no Vulkan
   SDK is needed.
