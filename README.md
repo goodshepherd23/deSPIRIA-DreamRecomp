@@ -59,6 +59,11 @@ LunaTranslator forgets the OCR region when it closes, so draw it again each sess
 translation is rough next to the team's; it gets you through the story until their translation
 of the later chapters is out.
 
+You can also follow the story with popomocco's
+[complete translated playthrough on YouTube](https://www.youtube.com/playlist?list=PLNWIo8BxEFzYPOp2jkPlwOrT1MoDREDCq)
+(23 videos, every chapter): play a chapter, then watch its part of the playlist to catch the
+dialogue you couldn't read.
+
 ## Install
 
 **Quiver Launcher:** add deSPIRIA from the catalog and press Play.
