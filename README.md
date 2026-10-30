@@ -37,6 +37,28 @@ This is early: expect rough edges, and keep a copy of your memory card.
   menus, items and maps are English throughout.
 - About **3 GB** of free space and an internet connection for the first launch.
 
+## Playing Chapter 2 onwards
+
+The English patch translates Chapter 1's story. From Chapter 2 the dialogue is Japanese again
+(menus, items and maps stay English). To read it, use
+[LunaTranslator](https://github.com/HIllya51/LunaTranslator), a free tool that reads text off
+the screen and machine-translates it as you play:
+
+1. Download `LunaTranslator_x64.zip` from its
+   [releases](https://github.com/HIllya51/LunaTranslator/releases), extract it anywhere and run
+   `LunaTranslator.exe`.
+2. In its settings, set the source language to **Japanese** and the target to **English**, and
+   pick a translator (Google or Bing work without an account).
+3. Switch the text input to **OCR** (reading the screen). Text hooking doesn't apply here.
+4. Draw the OCR region over the **whole game picture**: deSPIRIA has no fixed dialogue box, and
+   lines appear in the middle or at the top of the screen.
+5. Optional: right-click the region box to turn on in-place translation and click-through, and
+   minimize LunaTranslator's main bar so the OCR doesn't read it.
+
+LunaTranslator forgets the OCR region when it closes, so draw it again each session. Machine
+translation is rough next to the team's; it gets you through the story until their translation
+of the later chapters is out.
+
 ## Install
 
 **Quiver Launcher:** add deSPIRIA from the catalog and press Play.
