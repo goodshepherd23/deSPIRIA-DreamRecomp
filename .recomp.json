@@ -1,0 +1,16 @@
+{
+  "$schema": "https://recomp.fyi/schema/v1.json",
+  "game": "deSPIRIA",
+  "wikidata": "Q16321556",
+  "system": "Dreamcast",
+  "type": "recomp",
+  "original": {
+    "region": "Japan",
+    "serial": "T-14402M"
+  },
+  "project": "deSPIRIA on dream-recomp",
+  "status": "released",
+  "targets": ["Windows"],
+  "toolchain": "dream-recomp",
+  "approach": "Static recompilation of the SH-4 program with dream-recomp, played with the deSPIRIA Translation Initiative's English patch applied to your disc."
+}
