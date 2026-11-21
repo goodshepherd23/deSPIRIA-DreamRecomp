@@ -18,8 +18,10 @@ needed**. This kit adds the fixes deSPIRIA needs, its tuned configuration, and a
 
 - The title screen and menus, the developer logo and the opening movies with sound, and **New
   Game into the opening story**. Tested by the kit author through the opening with the Chapter 1
-  preview patch; not a playthrough. Full Game Beta 1 support is new in v0.1.2: its program builds
-  with the same configuration (the code it relies on is unchanged).
+  preview patch; not a playthrough.
+- **Full Game Beta 1** (new in v0.1.2): the **Swift** build is confirmed working. It builds with the
+  same configuration as the preview and runs. Setup also accepts the Original and VMU party
+  status builds, but no one has reported on them yet.
 - **Full speed** on a 15 W Intel i7-1355U laptop with integrated graphics.
 - **Saves** go to a memory card file, `saves\vmu-a1.bin` in your
   [data folder](#where-your-files-live), outside the app folder.
@@ -48,7 +50,7 @@ disc.
   battle text, maps, signposts and the translated graphics.
 - **Pacing:** *Original* (retail enemy health, encounter rate and rewards) or *Swift* (shorter
   regular battles, fewer random encounters, quicker MIND visuals, rewards rebalanced). The kit
-  accepts either.
+  accepts either; Swift is the one confirmed working so far.
 - **VMU live party status** is an experimental option, off by default; the team asks you to try it
   only if you want to help test it.
 - The setup also includes a save editor.
