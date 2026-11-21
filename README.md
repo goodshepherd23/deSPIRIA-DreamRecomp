@@ -79,6 +79,9 @@ rebuilt for the new disc's program automatically.
 
 ## Install
 
+**RecompLauncher:** find **deSPIRIA reBIRTH** in the catalog, install it and press Play. Updates
+come through the launcher too.
+
 **Quiver Launcher:** add deSPIRIA from the catalog and press Play.
 
 **By hand:** extract the release zip anywhere and run `deSPIRIA.exe`.
