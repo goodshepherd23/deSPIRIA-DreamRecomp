@@ -17,7 +17,9 @@ needed**. This kit adds the fixes deSPIRIA needs, its tuned configuration, and a
 ## What works
 
 - The title screen and menus, the developer logo and the opening movies with sound, and **New
-  Game into the opening story**. Tested by the kit author through the opening; not a playthrough.
+  Game into the opening story**. Tested by the kit author through the opening with the Chapter 1
+  preview patch; not a playthrough. Full Game Beta 1 support is new in v0.1.2: its program builds
+  with the same configuration (the code it relies on is unchanged).
 - **Full speed** on a 15 W Intel i7-1355U laptop with integrated graphics.
 - **Saves** go to a memory card file, `saves\vmu-a1.bin` in your
   [data folder](#where-your-files-live), outside the app folder.
@@ -30,39 +32,48 @@ This is early: expect rough edges, and keep a copy of your memory card.
 - Windows 10 or 11, 64-bit, with a Vulkan-capable GPU (any recent Intel, AMD or NVIDIA).
 - **deSPIRIA (Japan), T14402M**, dumped from your own disc as a **GDI** image (`.gdi` plus its
   track files).
-- **The English patch applied to it.** Run the translation team's
-  [patcher](https://github.com/deSPIRIA-Translation-Iniative/despiria-patcher-releases/releases)
-  on your disc first and keep the `.gdi` it writes. Any of its battle-speed settings works
-  (Original, Brisk, Swift); the kit author tested Brisk. The patch translates Chapter 1's story;
-  menus, items and maps are English throughout.
+- **The English patch applied to it** (see below), and the `.gdi` the patcher writes.
 - About **3 GB** of free space and an internet connection for the first launch.
 
-## Playing Chapter 2 onwards
+## The English patch
 
-The English patch translates Chapter 1's story. From Chapter 2 the dialogue is Japanese again
-(menus, items and maps stay English). To read it, use
-[LunaTranslator](https://github.com/HIllya51/LunaTranslator), a free tool that reads text off
-the screen and machine-translates it as you play:
+Get the translation team's
+[**Full Game Beta 1**](https://github.com/deSPIRIA-Translation-Iniative/despiria-patcher-releases/releases/tag/v1.0.0-beta1)
+(v1.0.0-beta1, `deSPIRIA-English-Translation-Setup.zip`), extract it and run
+`deSPIRIA-English-Translation-Setup.exe` on your own disc dump. It takes a GDI or CHD image and
+writes an English-patched `despiria.gdi`; choose that file when this kit's setup asks for your
+disc.
 
-1. Download `LunaTranslator_x64.zip` from its
-   [releases](https://github.com/HIllya51/LunaTranslator/releases), extract it anywhere and run
-   `LunaTranslator.exe`.
-2. In its settings, set the source language to **Japanese** and the target to **English**, and
-   pick a translator (Google or Bing work without an account).
-3. Switch the text input to **OCR** (reading the screen). Text hooking doesn't apply here.
-4. Draw the OCR region over the **whole game picture**: deSPIRIA has no fixed dialogue box, and
-   lines appear in the middle or at the top of the screen.
-5. Optional: right-click the region box to turn on in-place translation and click-through, and
-   minimize LunaTranslator's main bar so the OCR doesn't read it.
+- **The whole story is in English**, start to finish, along with menus, MIND and item names,
+  battle text, maps, signposts and the translated graphics.
+- **Pacing:** *Original* (retail enemy health, encounter rate and rewards) or *Swift* (shorter
+  regular battles, fewer random encounters, quicker MIND visuals, rewards rebalanced). The kit
+  accepts either.
+- **VMU live party status** is an experimental option, off by default; the team asks you to try it
+  only if you want to help test it.
+- The setup also includes a save editor.
 
-LunaTranslator forgets the OCR region when it closes, so draw it again each session. Machine
-translation is rough next to the team's; it gets you through the story until their translation
-of the later chapters is out.
+It is a **beta for feedback**, not the final release: expect rough edges and report them to the
+team on their Discord thread, per their release notes. Old saves should load, but the team asks you
+to **back up your saves first** (with this kit that's `saves\vmu-a1.bin` in your
+[data folder](#where-your-files-live)).
 
-You can also follow the story with popomocco's
+The release zip's SHA-256 is
+`3b14f7f8f58bd1a4bcb0c9d2dc1e40e7f33f6f8b37750caa16b2db40c0e9b87e`; the setup program is unsigned,
+so some antivirus engines flag it.
+
+### Still on the Chapter 1 preview?
+
+The kit still accepts discs patched with the earlier Chapter 1 preview (any of its Original, Brisk
+or Swift settings), but that preview translates only Chapter 1's story. Re-patching with Full Game
+Beta 1 is the way to read the rest; if you stay on the preview,
+[LunaTranslator](https://github.com/HIllya51/LunaTranslator) in OCR mode (Japanese to English,
+region over the whole picture, since deSPIRIA has no fixed dialogue box) or popomocco's
 [complete translated playthrough on YouTube](https://www.youtube.com/playlist?list=PLNWIo8BxEFzYPOp2jkPlwOrT1MoDREDCq)
-(23 videos, every chapter): play a chapter, then watch its part of the playlist to catch the
-dialogue you couldn't read.
+fill in the later chapters.
+
+Switching discs: patch the new disc, then run `deSPIRIA.exe --setup` and choose it. The game is
+rebuilt for the new disc's program automatically.
 
 ## Install
 
@@ -72,7 +83,8 @@ dialogue you couldn't read.
 
 On first launch a setup window opens:
 
-1. It asks for your English-patched `.gdi` and checks it is deSPIRIA with the English patch.
+1. It asks for your English-patched `.gdi` and checks it is deSPIRIA with the English patch
+   (Full Game Beta 1, or the earlier Chapter 1 preview).
 2. It downloads the build tools into `tools\` in the data folder: a portable clang (llvm-mingw),
    CMake, Ninja, Python, SDL3 and the Vulkan headers, about 1 GB unpacked. Every download is
    pinned and checked.
@@ -142,7 +154,9 @@ translator defects, documented in the file.
 - [dream-recomp](https://github.com/phobos665/dream-recomp) by phobos665, GPL-2.0.
 - The English translation is the
   [deSPIRIA Translation Initiative](https://github.com/deSPIRIA-Translation-Iniative/despiria-patcher-releases)'s
-  work; this kit contains none of it and only checks that it is applied.
+  work: translation by rio de popomocco; programming by DinoJesus (John) and Swamp Izzo Stan 2025;
+  testing, feedback and QA by Swamp Izzo Stan 2025 and Hazric. This kit contains none of it and
+  only checks that it is applied.
 - deSPIRIA is © Atlus 2000. This project is not affiliated with Atlus or Sega.
 
 This kit is GPL-2.0 (see LICENSE), like dream-recomp, whose files it contains in modified form.

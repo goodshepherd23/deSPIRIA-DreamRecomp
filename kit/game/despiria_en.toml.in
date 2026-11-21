@@ -1,10 +1,11 @@
-# deSPIRIA (English, Chapter 1 preview), T14402M
-# Template for the deSPIRIA kit: setup.ps1 replaces @DISC@ with your disc image. Everything here
+# deSPIRIA (English translation), T14402M
+# Template for the deSPIRIA kit: setup.ps1 replaces @DISC@ with your disc image and @TITLE@ with the
+# translation release it finds on it. Everything here
 # is read off the disc or is the standard Katana layout; nothing from the disc itself is included.
 
 [game]
 id = "despiria_en"
-title = "deSPIRIA (English, Chapter 1 preview)"
+title = "deSPIRIA (@TITLE@)"
 region = "Japan"
 product = "T14402M"
 

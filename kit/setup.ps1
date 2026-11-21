@@ -43,12 +43,20 @@ $Pins = @{
     chdr   = @{ Url = 'https://codeload.github.com/rtissera/libchdr/zip/8e7b8bd32bc676b7e5c6b42fe7d2daca986c4a0d'
                 Sha = 'd88f0ac2a338d78f33a7c7cbd705a4abd24ccddd6abf82151128812679555dc9'; Dir = 'libchdr-src'; Source = $true }
 }
-# The English Chapter 1 preview's boot program, one per battle-speed setting (from the patcher's
-# own build metadata). Only these are accepted: the configuration is tuned to this program.
+# The English translation's boot program, one per release and setting (from each patcher's own
+# build metadata, payload\_build_meta.json). Only these are accepted: the configuration is tuned to
+# this program. Every one keeps the code the configuration names at the same addresses; the
+# translation edits text in place and appends its own code past the original program.
 $KnownBoot = @{
-    '39573c41c57505aabf4699ab4b391509ecfb1070e3e0b2ed1c44a8de05bb88bf' = 'English Chapter 1 preview, Original speed'
-    'e38f6d07db3850b10e37f2e971e656beeb1faf2fb070106c6f8e7366b70e8fc3' = 'English Chapter 1 preview, Brisk speed'
-    '7924e377af5704bffd0d27f3177ca3f6918a93debbca9dc76655f394a73b7334' = 'English Chapter 1 preview, Swift speed'
+    # Full Game Beta 1 (v1.0.0-beta1, 2026-11-18)
+    'e9e1867add678bddcd4c8c52479fb9be3bea1943584ea49cdd034faf5a943221' = @{ Label = 'English translation, Full Game Beta 1, Original speed'; Title = 'English 1.0 beta' }
+    '927602e58742da8d2b8076dd061f54d2028500926329cd15f6d24d9fef4981d1' = @{ Label = 'English translation, Full Game Beta 1, Swift speed'; Title = 'English 1.0 beta' }
+    '7c3bf7a9a080e9fdba8f171fd87c22fc3615e93c489fd097ad1cf3044382ba74' = @{ Label = 'English translation, Full Game Beta 1, Original speed, VMU party status'; Title = 'English 1.0 beta' }
+    'a5e8515077700b722619a27e680568528c1ccbf968f76a7fe6c76577f34b798d' = @{ Label = 'English translation, Full Game Beta 1, Swift speed, VMU party status'; Title = 'English 1.0 beta' }
+    # Chapter 1 Preview (v0.1.0-preview-hotfix5)
+    '39573c41c57505aabf4699ab4b391509ecfb1070e3e0b2ed1c44a8de05bb88bf' = @{ Label = 'English Chapter 1 preview, Original speed'; Title = 'English, Chapter 1 preview' }
+    'e38f6d07db3850b10e37f2e971e656beeb1faf2fb070106c6f8e7366b70e8fc3' = @{ Label = 'English Chapter 1 preview, Brisk speed'; Title = 'English, Chapter 1 preview' }
+    '7924e377af5704bffd0d27f3177ca3f6918a93debbca9dc76655f394a73b7334' = @{ Label = 'English Chapter 1 preview, Swift speed'; Title = 'English, Chapter 1 preview' }
 }
 
 $kit   = "$Root\kit"
@@ -129,13 +137,15 @@ $fields = @{}; foreach ($kv in ("$info" -split '\s+')) { $k, $v = $kv -split '='
 if ($fields.product -ne 'T14402M') { Fail "This disc is $($fields.product), not deSPIRIA (T14402M)." }
 if (-not $KnownBoot.ContainsKey($fields.sha256)) {
     if ($fields.size -eq '1484260') { Fail 'This is the original Japanese disc. Apply the English patch to it first (see README), then choose the patched .gdi.' }
-    Fail "This deSPIRIA disc's program is not one this kit knows (sha256 $($fields.sha256)). It supports the English Chapter 1 preview patch."
+    Fail "This deSPIRIA disc's program is not one this kit knows (sha256 $($fields.sha256)). It supports the English translation's Full Game Beta 1 and Chapter 1 preview; see README."
 }
+$variant = $KnownBoot[$fields.sha256]
 Write-Host "Disc: $Disc"
-Write-Host "Found: $($KnownBoot[$fields.sha256])"
+Write-Host "Found: $($variant.Label)"
 $discToml = $Disc -replace '\\', '/'
-[IO.File]::WriteAllText($toml, (Get-Content -LiteralPath "$kit\game\despiria_en.toml.in" -Raw).Replace('@DISC@', $discToml),
-    (New-Object Text.UTF8Encoding($false)))
+# The window is titled after the translation release on the disc.
+$cfgText = (Get-Content -LiteralPath "$kit\game\despiria_en.toml.in" -Raw).Replace('@DISC@', $discToml).Replace('@TITLE@', $variant.Title)
+[IO.File]::WriteAllText($toml, $cfgText, (New-Object Text.UTF8Encoding($false)))
 
 $stamp = "$game\.kit-build"
 $want = "$KitVersion $($fields.sha256)"
