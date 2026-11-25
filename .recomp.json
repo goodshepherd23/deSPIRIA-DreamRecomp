@@ -12,5 +12,5 @@
   "status": "released",
   "targets": ["Windows"],
   "toolchain": "dream-recomp",
-  "approach": "Static recompilation of the SH-4 program with dream-recomp, played in English with the deSPIRIA Translation Initiative's Full Game Beta 1 patch applied to your disc."
+  "approach": "Static recompilation of the SH-4 program with dream-recomp, played in English with the deSPIRIA Translation Initiative's Full Game Beta 2 patch applied to your disc."
 }
