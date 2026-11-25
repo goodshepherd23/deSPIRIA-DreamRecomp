@@ -19,10 +19,10 @@ needed**. This kit adds the fixes deSPIRIA needs, its tuned configuration, and a
 - The title screen and menus, the developer logo and the opening movies with sound, and **New
   Game into the opening story**. Tested by the kit author through the opening with the Chapter 1
   preview patch; not a playthrough.
-- **Full Game Beta 2** (new in v0.1.3): every address this kit's configuration relies on is
-  unchanged from Beta 1, and the Swift + VMU party status build translates (84.7%) and compiles
-  with the same configuration. Setup accepts all four builds (Original or Swift, with or without
-  VMU party status). Not play-tested on Beta 2 yet; please report how it runs.
+- **Full Game Beta 2** (new in v0.1.3): the **Swift + VMU party status** build is confirmed
+  working. It builds with the same configuration as Beta 1. Setup also accepts the other three
+  builds (Original, and either pacing without VMU party status), but no one has reported on them
+  yet.
 - **Full Game Beta 1** (v0.1.2): the **Swift** build is confirmed working. Setup also accepts the
   Original and VMU party status builds, but no one has reported on them yet.
 - **Full speed** on a 15 W Intel i7-1355U laptop with integrated graphics.
