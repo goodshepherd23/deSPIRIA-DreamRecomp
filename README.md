@@ -19,9 +19,12 @@ needed**. This kit adds the fixes deSPIRIA needs, its tuned configuration, and a
 - The title screen and menus, the developer logo and the opening movies with sound, and **New
   Game into the opening story**. Tested by the kit author through the opening with the Chapter 1
   preview patch; not a playthrough.
-- **Full Game Beta 1** (new in v0.1.2): the **Swift** build is confirmed working. It builds with the
-  same configuration as the preview and runs. Setup also accepts the Original and VMU party
-  status builds, but no one has reported on them yet.
+- **Full Game Beta 2** (new in v0.1.3): every address this kit's configuration relies on is
+  unchanged from Beta 1, and the Swift + VMU party status build translates (84.7%) and compiles
+  with the same configuration. Setup accepts all four builds (Original or Swift, with or without
+  VMU party status). Not play-tested on Beta 2 yet; please report how it runs.
+- **Full Game Beta 1** (v0.1.2): the **Swift** build is confirmed working. Setup also accepts the
+  Original and VMU party status builds, but no one has reported on them yet.
 - **Full speed** on a 15 W Intel i7-1355U laptop with integrated graphics.
 - **Saves** go to a memory card file, `saves\vmu-a1.bin` in your
   [data folder](#where-your-files-live), outside the app folder.
@@ -40,35 +43,46 @@ This is early: expect rough edges, and keep a copy of your memory card.
 ## The English patch
 
 Get the translation team's
-[**Full Game Beta 1**](https://github.com/deSPIRIA-Translation-Iniative/despiria-patcher-releases/releases/tag/v1.0.0-beta1)
-(v1.0.0-beta1, `deSPIRIA-English-Translation-Setup.zip`), extract it and run
+[**Full Game Beta 2**](https://github.com/deSPIRIA-Translation-Iniative/despiria-patcher-releases/releases/tag/v1.0.0-beta2)
+(v1.0.0-beta2, 2026-11-22, `deSPIRIA-English-Translation-Setup.zip`), extract it and run
 `deSPIRIA-English-Translation-Setup.exe` on your own disc dump. It takes a GDI or CHD image and
 writes an English-patched `despiria.gdi`; choose that file when this kit's setup asks for your
-disc.
+disc. Running it on a disc you already patched with Beta 1 is fine, per the team.
 
 - **The whole story is in English**, start to finish, along with menus, MIND and item names,
   battle text, maps, signposts and the translated graphics.
 - **Pacing:** *Original* (retail enemy health, encounter rate and rewards) or *Swift* (shorter
   regular battles, fewer random encounters, quicker MIND visuals, rewards rebalanced). The kit
-  accepts either; Swift is the one confirmed working so far.
+  accepts either.
 - **VMU live party status** is an experimental option, off by default; the team asks you to try it
   only if you want to help test it.
 - The setup also includes a save editor.
 
-It is a **beta for feedback**, not the final release: expect rough edges and report them to the
-team on their Discord thread, per their release notes. Old saves should load, but the team asks you
-to **back up your saves first** (with this kit that's `saves\vmu-a1.bin` in your
-[data folder](#where-your-files-live)).
+**New in Beta 2**, per the team's notes: the setup wizard no longer fails at the end with VMU live
+party status on, and it checks for the wrong disc, bad dumps and unwritable folders before it
+starts. In the game, save and load slot names fit their frames, choice popups and the MIND legend
+draw their full borders, item-menu party names are spaced properly, robot speech wraps only at word
+breaks, and the dialogue reveal speed is retuned. The team calls the slot-name, robot-wrapping and
+border fixes checked on paper but not yet booted on a console.
 
-The release zip's SHA-256 is
-`3b14f7f8f58bd1a4bcb0c9d2dc1e40e7f33f6f8b37750caa16b2db40c0e9b87e`; the setup program is unsigned,
+It is a **beta for feedback**, not the final release: expect rough edges and report them to the
+team on their Discord thread, with the build hash from their release notes. Old saves should load,
+but the team asks you to **back up your saves first** (with this kit that's `saves\vmu-a1.bin` in
+your [data folder](#where-your-files-live)).
+
+The Beta 2 release zip's SHA-256 is
+`883a89c3335b332823940744c2ef100fd4b86a2f4b8605df0af13b60caa3796d`; the setup program is unsigned,
 so some antivirus engines flag it.
 
-### Still on the Chapter 1 preview?
+### Still on Beta 1 or the Chapter 1 preview?
 
-The kit still accepts discs patched with the earlier Chapter 1 preview (any of its Original, Brisk
+The kit still accepts Full Game Beta 1 discs (all four builds). To move to Beta 2, back up your
+memory card, re-patch your disc with Beta 2, then run `deSPIRIA.exe --setup` and choose the new
+`.gdi`.
+
+It also still accepts discs patched with the earlier Chapter 1 preview (any of its Original, Brisk
 or Swift settings), but that preview translates only Chapter 1's story. Re-patching with Full Game
-Beta 1 is the way to read the rest; if you stay on the preview,
+Beta 2 is the way to read the rest; if you stay on the preview,
 [LunaTranslator](https://github.com/HIllya51/LunaTranslator) in OCR mode (Japanese to English,
 region over the whole picture, since deSPIRIA has no fixed dialogue box) or popomocco's
 [complete translated playthrough on YouTube](https://www.youtube.com/playlist?list=PLNWIo8BxEFzYPOp2jkPlwOrT1MoDREDCq)
@@ -89,7 +103,7 @@ come through the launcher too.
 On first launch a setup window opens:
 
 1. It asks for your English-patched `.gdi` and checks it is deSPIRIA with the English patch
-   (Full Game Beta 1, or the earlier Chapter 1 preview).
+   (Full Game Beta 2, or the earlier Beta 1 or Chapter 1 preview).
 2. It downloads the build tools into `tools\` in the data folder: a portable clang (llvm-mingw),
    CMake, Ninja, Python, SDL3 and the Vulkan headers, about 1 GB unpacked. Every download is
    pinned and checked.

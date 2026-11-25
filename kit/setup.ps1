@@ -48,6 +48,11 @@ $Pins = @{
 # this program. Every one keeps the code the configuration names at the same addresses; the
 # translation edits text in place and appends its own code past the original program.
 $KnownBoot = @{
+    # Full Game Beta 2 (v1.0.0-beta2, 2026-11-22)
+    'fe32365ca712b77d0061ad783e347fb61735a6f09f21607e2d4b25b0c3f9ee83' = @{ Label = 'English translation, Full Game Beta 2, Original speed'; Title = 'English 1.0 beta 2' }
+    '256979b4be8cb0ed4c76bff141d8bb1e0dbf96136d864dfec228d0595a5473cb' = @{ Label = 'English translation, Full Game Beta 2, Swift speed'; Title = 'English 1.0 beta 2' }
+    'bd0a494ca754d58a63bdc37e7117794c9e15d1c54ae30f6c7598bc3d84752d21' = @{ Label = 'English translation, Full Game Beta 2, Original speed, VMU party status'; Title = 'English 1.0 beta 2' }
+    'e68dba42ac7f0b6cfdc360cecfab092ad734bd8ec363164fa910c4f7d96319a5' = @{ Label = 'English translation, Full Game Beta 2, Swift speed, VMU party status'; Title = 'English 1.0 beta 2' }
     # Full Game Beta 1 (v1.0.0-beta1, 2026-11-18)
     'e9e1867add678bddcd4c8c52479fb9be3bea1943584ea49cdd034faf5a943221' = @{ Label = 'English translation, Full Game Beta 1, Original speed'; Title = 'English 1.0 beta' }
     '927602e58742da8d2b8076dd061f54d2028500926329cd15f6d24d9fef4981d1' = @{ Label = 'English translation, Full Game Beta 1, Swift speed'; Title = 'English 1.0 beta' }
@@ -137,7 +142,7 @@ $fields = @{}; foreach ($kv in ("$info" -split '\s+')) { $k, $v = $kv -split '='
 if ($fields.product -ne 'T14402M') { Fail "This disc is $($fields.product), not deSPIRIA (T14402M)." }
 if (-not $KnownBoot.ContainsKey($fields.sha256)) {
     if ($fields.size -eq '1484260') { Fail 'This is the original Japanese disc. Apply the English patch to it first (see README), then choose the patched .gdi.' }
-    Fail "This deSPIRIA disc's program is not one this kit knows (sha256 $($fields.sha256)). It supports the English translation's Full Game Beta 1 and Chapter 1 preview; see README."
+    Fail "This deSPIRIA disc's program is not one this kit knows (sha256 $($fields.sha256)). It supports the English translation's Full Game Beta 2, Beta 1 and Chapter 1 preview; see README."
 }
 $variant = $KnownBoot[$fields.sha256]
 Write-Host "Disc: $Disc"
